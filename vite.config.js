@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/movie-night-planner/",
+  base: "/movie-night-planner-pj/",
 });
