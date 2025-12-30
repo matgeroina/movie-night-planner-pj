@@ -54,7 +54,7 @@ export default function MovieDetails() {
 
   return (
     <div className="details-page">
-      <Link className="btn" to="/">← Back</Link>
+      <Link className="btn" to="/">← Back to Search</Link>
 
       <div className="card details-card">
         <img
