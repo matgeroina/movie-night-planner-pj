@@ -4,7 +4,6 @@ import { getMovieById } from "../api/movies";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import Loader from "../components/Loader";
 
-
 const FALLBACK_POSTER =
   "https://via.placeholder.com/300x445?text=No+Poster";
 
@@ -47,7 +46,6 @@ export default function MovieDetails() {
   }, [id]);
 
   if (loading) return <Loader label="Loading movie…" />;
-
   if (error) return <p className="card">Error: {error}</p>;
   if (!movie) return null;
 
@@ -55,24 +53,20 @@ export default function MovieDetails() {
     movie.Poster && movie.Poster !== "N/A" ? movie.Poster : FALLBACK_POSTER;
 
   return (
-    <div style={{ display: "grid", gap: 14 }}>
+    <div className="details-page">
       <Link className="btn" to="/">← Back</Link>
 
-      <div className="card" style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 20 }}>
+      <div className="card details-card">
         <img
+          className="details-poster"
           src={poster}
           alt={`${movie.Title} poster`}
-          style={{
-            width: "100%",
-            borderRadius: 14,
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}
         />
 
-        <div style={{ display: "grid", gap: 10 }}>
-          <h1 style={{ margin: 0 }}>{movie.Title}</h1>
+        <div className="details-content">
+          <h1>{movie.Title}</h1>
 
-          <div style={{ opacity: 0.85 }}>
+          <div className="details-meta">
             {movie.Year} • {movie.Runtime} • {movie.Genre}
           </div>
 
@@ -80,15 +74,20 @@ export default function MovieDetails() {
             ⭐ IMDb rating: <b>{movie.imdbRating}</b>
           </div>
 
-          <p style={{ lineHeight: 1.5 }}>{movie.Plot}</p>
+          <p className="details-plot">{movie.Plot}</p>
 
-          <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
+          <div className="details-actions">
             <button className="btn" onClick={toggleFavorite}>
               {isFavorite ? "★ Remove from favorites" : "☆ Add to favorites"}
             </button>
 
             {movie.Website && movie.Website !== "N/A" && (
-              <a className="btn" href={movie.Website} target="_blank" rel="noreferrer">
+              <a
+                className="btn"
+                href={movie.Website}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Official site
               </a>
             )}
